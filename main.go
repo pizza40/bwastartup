@@ -19,11 +19,10 @@ import (
 //service = melakukan mapping dari struct input ke struct user
 //repository
 
-
-func main(){
+func main() {
 	//buat connection ke database mysql
 	dsn := "root:@tcp(127.0.0.1:3306)/bwastartup?charset=utf8mb4&parseTime=True&loc=Local"
-  	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal(err.Error())
@@ -32,8 +31,6 @@ func main(){
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
 	userHandler := handler.NewUserHandler(userService)
-	
-	
 
 	router := gin.Default()
 
@@ -41,8 +38,8 @@ func main(){
 
 	api.POST("/users", userHandler.RegisterUser)
 	api.POST("/sessions", userHandler.Login)
+	api.POST("/email_checkers", userHandler.CheckEmailAvailabality)
 	router.Run()
-	
 
 	//make router
 	// router := gin.Default()
