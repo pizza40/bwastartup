@@ -194,3 +194,9 @@ func (h *userHandler) UploadAvatar(c *gin.Context){
 
 	c.JSON(http.StatusOK, response)
 }
+
+// create campaign endpoint step
+// tangkap parameter dari user ke input struct
+// ambil current user dari jwt/handler
+// panggil service, parameternya adalah input struct (dan juga buat slug)
+// call repository untuk simpan data campaign baru
